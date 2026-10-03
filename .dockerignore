@@ -1,0 +1,9 @@
+# Ce qui n'est pas envoyé à Docker lors du build : plus rapide, et aucun secret dans l'image.
+.env
+.venv/
+.git/
+data/
+mlruns/
+mlflow.db
+.pytest_cache/
+**/__pycache__/

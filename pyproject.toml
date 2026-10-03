@@ -1,0 +1,56 @@
+[project]
+name = "rag-assistant"
+version = "0.1.0"
+description = "Assistant RAG de support aux panélistes (données fictives PanelConso)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.142.1",
+    "httpx>=0.28.1",
+    "langchain-chroma>=1.1.0",
+    "langchain-classic>=1.0.8",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.6.6",
+    "langchain-huggingface>=1.2.2",
+    "langchain-litellm>=0.10.0",
+    "langchain-text-splitters>=1.1.2",
+    "litellm>=1.103.1",
+    "python-dotenv>=1.2.3",
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=6.1.0",
+    "snowballstemmer>=3.1.1",
+    "streamlit>=1.64.0",
+    # Dépendance de sentence-transformers, déclarée ici pour pouvoir choisir sa source (ci-dessous).
+    "torch>=2.14.0",
+    "uvicorn>=0.54.0",
+]
+
+# Sous Linux (CI GitHub Actions, image Docker), torch vient de l'index « CPU » de PyTorch :
+# la version par défaut embarque CUDA (plusieurs Go) alors que tout tourne sur CPU ici.
+# Sous Windows et macOS, la version par défaut de PyPI est déjà sans CUDA.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[build-system]
+requires = ["uv_build>=0.11,<0.12"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+# Le package s'appelle « rag » (src/rag/), pas « rag_assistant » comme le projet.
+module-name = "rag"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# scripts/ et app/ ne sont pas des packages : on les rend importables pour les tester.
+pythonpath = ["scripts", "app"]
+
+[dependency-groups]
+dev = [
+    "mlflow>=3.16.1",
+    "pytest>=9.1.1",
+]

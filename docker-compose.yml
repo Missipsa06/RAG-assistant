@@ -1,0 +1,31 @@
+# Lance l'API et l'interface à partir de la même image.
+# Usage : docker compose up --build   puis ouvrir http://localhost:8510
+services:
+  api:
+    build: .
+    image: rag-assistant
+    # Clé d'API lue au lancement depuis .env (jamais copiée dans l'image).
+    env_file: .env
+    ports:
+      # Port 8010 côté machine : le 8000 est déjà utilisé (WSL) sur le poste de développement.
+      - "8010:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      # Le démarrage charge le modèle d'embeddings et l'index (~40 s mesurés en local).
+      start_period: 90s
+
+  ui:
+    image: rag-assistant
+    command: ["streamlit", "run", "app/streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+    environment:
+      # Dans le réseau Docker, l'API est joignable par le nom de son service.
+      API_URL: http://api:8000
+    ports:
+      # Port 8510 côté machine : le 8501 est lui aussi pris par WSL sur le poste de développement.
+      - "8510:8501"
+    depends_on:
+      api:
+        condition: service_healthy

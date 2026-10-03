@@ -1,0 +1,13 @@
+{"run": "gen_medium31_v1", "id": "Q009", "fidele": false, "correcte": false, "comportement_ok": null, "note": "Déduit « vous ne pouvez pas enregistrer ce produit » d'un extrait incomplet : contredit la doc."}
+{"run": "gen_medium31_v1", "id": "Q015", "fidele": true, "correcte": false, "comportement_ok": null, "note": "Dit que la doc ne précise pas (vrai pour les extraits reçus) ; manque « 3 appareils »."}
+{"run": "gen_medium31_v1", "id": "Q057", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Numéro dans la rubrique Aide, aucun numéro inventé."}
+{"run": "gen_doc_promptv1", "id": "Q075", "fidele": false, "correcte": false, "comportement_ok": null, "note": "« Les points peuvent être perdus uniquement dans les cas suivants » : généralisation abusive ; expiration absente."}
+{"run": "gen_doc_promptv2", "id": "Q009", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Procédure complète, conforme."}
+{"run": "gen_doc_promptv2", "id": "Q015", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Jusqu'à 3 appareils, même identifiant foyer."}
+{"run": "e2e_router_v2", "id": "Q064", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Refus hors sujet poli, recentré."}
+{"run": "e2e_router_v2", "id": "Q069", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Pas d'accès aux comptes ; solde dans l'onglet Récompenses."}
+{"run": "e2e_router_v2", "id": "Q074", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Canaux et horaires du support."}
+{"run": "e2e_router_v2", "id": "Q075", "fidele": true, "correcte": false, "comportement_ok": true, "note": "Oriente vers le support mais n'évoque pas l'expiration (élément clé)."}
+{"run": "e2e_router_v2", "id": "Q078", "fidele": true, "correcte": true, "comportement_ok": true, "note": "Contacter le support, vérification d'identité."}
+{"run": "e2e_router_v2", "id": "Q079", "fidele": true, "correcte": false, "comportement_ok": true, "note": "Échange gratuit, mais pas de vérification de la charge USB-C (élément clé)."}
+{"run": "e2e_router_v2", "id": "Q063", "fidele": true, "correcte": false, "comportement_ok": false, "note": "Refusée comme hors sujet : ne dit pas ce que la doc ne précise pas."}
